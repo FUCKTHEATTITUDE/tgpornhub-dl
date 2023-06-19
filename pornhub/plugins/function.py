@@ -1,6 +1,5 @@
 import asyncio
 import threading
-import time
 from pyrogram.errors import MessageNotModified, FloodWait
 
 
@@ -18,7 +17,6 @@ def humanbytes(size):
 
 def edit_msg(client, message, to_edit):
     try:
-        time.sleep(20)
         client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
         client.loop.create_task(asyncio.sleep(e.value))
