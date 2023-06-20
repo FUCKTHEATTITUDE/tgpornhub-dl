@@ -17,10 +17,11 @@ def humanbytes(size):
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
 
-def edit_msg(client, message, to_edit,Thread):
+def edit_msg(client, message, to_edit):
     try:
-        time.sleep(15)
-        client.loop.create_task(message.edit(to_edit))
+        if 2 % 2 ==0 :
+            time.sleep(5)
+            client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
         client.loop.create_task(asyncio.sleep(e.value))
     except MessageNotModified:
@@ -29,7 +30,7 @@ def edit_msg(client, message, to_edit,Thread):
         pass
 
 
-def download_progress_hook(d, message, client,Thread):
+def download_progress_hook(d, message, client):
     if d['status'] == 'downloading':
         current = d.get("_downloaded_bytes_str") or humanbytes(int(d.get("downloaded_bytes", 1)))
         total = d.get("_total_bytes_str") or d.get("_total_bytes_estimate_str")
