@@ -19,8 +19,8 @@ def humanbytes(size):
 
 def edit_msg(client, message, to_edit):
     try:
-        await asyncio.sleep(5)
-        client.loop.create_task(message.edit(to_edit))
+       await asyncio.sleep(5)
+       client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
         client.loop.create_task(asyncio.sleep(e.value))
     except MessageNotModified:
