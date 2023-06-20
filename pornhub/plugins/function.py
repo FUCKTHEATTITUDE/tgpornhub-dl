@@ -1,5 +1,7 @@
 import asyncio
 import threading
+from threading import Thread
+import time
 from pyrogram.errors import MessageNotModified, FloodWait
 
 
@@ -15,8 +17,9 @@ def humanbytes(size):
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
 
-def edit_msg(client, message, to_edit):
+def edit_msg(client, message, to_edit,Thread):
     try:
+        time.sleep(15)
         client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
         client.loop.create_task(asyncio.sleep(e.value))
@@ -26,7 +29,7 @@ def edit_msg(client, message, to_edit):
         pass
 
 
-def download_progress_hook(d, message, client):
+def download_progress_hook(d, message, client,Thread):
     if d['status'] == 'downloading':
         current = d.get("_downloaded_bytes_str") or humanbytes(int(d.get("downloaded_bytes", 1)))
         total = d.get("_total_bytes_str") or d.get("_total_bytes_estimate_str")
