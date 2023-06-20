@@ -3,7 +3,7 @@ import threading
 from pyrogram.errors import MessageNotModified, FloodWait
 
 
-def humanbytes(size):
+async def humanbytes(size):
     if not size:
         return ""
     power = 2 ** 10
@@ -15,7 +15,7 @@ def humanbytes(size):
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
 
-def edit_msg(client, message, to_edit):
+async def edit_msg(client, message, to_edit):
     try:
         client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
@@ -26,7 +26,7 @@ def edit_msg(client, message, to_edit):
         pass
 
 
-def download_progress_hook(d, message, client):
+async def download_progress_hook(d, message, client):
     if d['status'] == 'downloading':
         current = d.get("_downloaded_bytes_str") or humanbytes(int(d.get("downloaded_bytes", 1)))
         total = d.get("_total_bytes_str") or d.get("_total_bytes_estimate_str")
