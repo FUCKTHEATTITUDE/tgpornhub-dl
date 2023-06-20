@@ -9,5 +9,6 @@ psutil
 python-ffmpeg
 pornhub-api==0.2.0
 youtube-search
+youtube_dl
 youtube-search-python
 git+https://github.com/yt-dlp/yt-dlp.git
