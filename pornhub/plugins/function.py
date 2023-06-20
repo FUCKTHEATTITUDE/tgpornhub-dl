@@ -27,7 +27,7 @@ def edit_msg(client, message, to_edit):
 
 
 def download_progress_hook(d, message, client):
-    if d['status'] == 'downloading':
+    if d['status'] == """downloading ENJOY THE VIDEOZ YOUR REQUESTED VIDEO WILL BE DOWNLOAD IN 3 MINS OR BELOW""":
         current = d.get("_downloaded_bytes_str") or humanbytes(int(d.get("downloaded_bytes", 1)))
         total = d.get("_total_bytes_str") or d.get("_total_bytes_estimate_str")
         file_name = d.get("filename")
@@ -35,4 +35,4 @@ def download_progress_hook(d, message, client):
         percent = d.get("_percent_str", "N/A")
         speed = d.get("_speed_str", "N/A")
         to_edit = f"📥 <b>Downloading!</b>\n\n<b>Name :</b> <code>{file_name}</code>\n<b>Size :</b> <code>{total}</code>\n<b>Speed :</b> <code>{speed}</code>\n<b>ETA :</b> <code>{eta}</code>\n\n<b>Percentage: </b> <code>{current}</code> from <code>{total} (__{percent}__)</code>"
-        edit_msg(client, message, to_edit)
+        
