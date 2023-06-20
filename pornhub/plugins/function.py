@@ -1,7 +1,5 @@
 import asyncio
 import threading
-from threading import Thread
-import time
 from pyrogram.errors import MessageNotModified, FloodWait
 
 
@@ -19,7 +17,7 @@ def humanbytes(size):
 
 def edit_msg(client, message, to_edit):
     try:
-       client.loop.create_task(message.edit(to_edit))
+        client.loop.create_task(message.edit(to_edit))
     except FloodWait as e:
         client.loop.create_task(asyncio.sleep(e.value))
     except MessageNotModified:
@@ -37,13 +35,4 @@ def download_progress_hook(d, message, client):
         percent = d.get("_percent_str", "N/A")
         speed = d.get("_speed_str", "N/A")
         to_edit = f"📥 <b>Downloading!</b>\n\n<b>Name :</b> <code>{file_name}</code>\n<b>Size :</b> <code>{total}</code>\n<b>Speed :</b> <code>{speed}</code>\n<b>ETA :</b> <code>{eta}</code>\n\n<b>Percentage: </b> <code>{current}</code> from <code>{total} (__{percent}__)</code>"
-        while 2!=0:
-                  try:
-                     time.sleep(5)
-                     t = (target=edit_msg, args=(client, message, to_edit))
-                  except FloodWait as e:
-                      client.loop.create_task(asyncio.sleep(e.value))
-                  except MessageNotModified:
-                        pass
-                  except TypeError:
-                              pass
+        
